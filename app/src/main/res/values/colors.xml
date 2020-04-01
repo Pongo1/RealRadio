@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#008577</color>
+  <color name="colorPrimaryDark">#00574B</color>
+  <color name="colorAccent">#D81B60</color>
+  <color name="lightViolet">#CACAF8</color>
+  <color name="playViolet">#430CAA</color>
+  <color name="appViolet">#430CAA</color>
+  <color name="textViolet">#BF6DE3</color>
+  <color name="lightGray">#D9D9D9</color>
+</resources>

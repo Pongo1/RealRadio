@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  app:cardElevation="2dp"
+  android:layout_marginLeft="10dp"
+  android:layout_marginRight="10dp"
+  android:layout_marginBottom="7dp"
+  app:cardCornerRadius="10dp">
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+      android:id="@+id/channel_play_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:width="110dp"
+      android:height="100dp"
+      android:background="@drawable/left_of_channel_card" />
+
+    <TextView
+      android:id="@+id/channel_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerVertical="true"
+      android:layout_marginLeft="60dp"
+      android:layout_toRightOf="@+id/channel_play_button"
+      android:text="CHANNEL 1"
+      android:textSize="20sp" />
+
+  </RelativeLayout>
+</androidx.cardview.widget.CardView>
