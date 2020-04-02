@@ -1,11 +1,14 @@
 package com.pongo.agbaradio;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
@@ -16,9 +19,10 @@ import java.util.HashMap;
 
 public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder> {
   ArrayList<String[]> channels;
-
-  public ChannelAdapter(ArrayList<String[]> channels) {
+  Context context;
+  public ChannelAdapter(Context context, ArrayList<String[]> channels) {
     this.channels = channels;
+    this.context = context;
   }
 
   @NonNull
@@ -31,7 +35,14 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder
 
   @Override
   public void onBindViewHolder(@NonNull ChannelAdapter.myHolder holder, int position) {
+    final String url = channels.get(position)[1];
     holder.channelName.setText(channels.get(position)[0]);
+    holder.cardAsButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
   @Override
@@ -41,10 +52,12 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder
 
   class myHolder extends RecyclerView.ViewHolder {
     TextView channelName;
+    CardView cardAsButton;
 
     public myHolder(@NonNull View itemView) {
       super(itemView);
       this.channelName = itemView.findViewById(R.id.channel_name);
+      this.cardAsButton = itemView.findViewById(R.id.whole_card);
     }
   }
 }

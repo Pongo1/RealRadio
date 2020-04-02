@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     RecyclerView recyclerView = findViewById(R.id.channel_recycler);
-    ChannelAdapter channelAdapter = new ChannelAdapter(StaticDB.DB);
+    ChannelAdapter channelAdapter = new ChannelAdapter(this,StaticDB.DB);
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setAdapter(channelAdapter);

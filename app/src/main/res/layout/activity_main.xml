@@ -4,24 +4,26 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:background="@android:color/white"
   android:orientation="vertical"
   tools:context=".MainActivity">
 
 
   <TextView
-    android:textSize="20sp"
-    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="20dp"
     android:text="Select a channel to play"
     android:textColor="@color/lightGray"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:textSize="20sp" />
+
   <androidx.recyclerview.widget.RecyclerView
-    android:layout_marginTop="10dp"
     android:id="@+id/channel_recycler"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
 
 
 </LinearLayout>
