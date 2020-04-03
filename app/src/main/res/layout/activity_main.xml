@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
@@ -9,21 +9,77 @@
   tools:context=".MainActivity">
 
 
-  <TextView
+  <LinearLayout
+
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginRight="20dp"
-    android:text="Select a channel to play"
-    android:textColor="@color/lightGray"
-    android:textSize="20sp" />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-  <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/channel_recycler"
+    <TextView
+      android:id="@+id/label"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginTop="20dp"
+      android:layout_marginRight="20dp"
+      android:text="Select a channel to play"
+      android:textColor="@color/lightGray"
+      android:textSize="15sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/channel_recycler"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
+  </LinearLayout>
+
+  <LinearLayout
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet"
+    android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"></androidx.recyclerview.widget.RecyclerView>
+    android:layout_height="150dp"
+    android:layout_margin="5dp"
+    android:elevation="15dp"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight = "60dp"
+    >
+    <TextView
+     android:paddingTop="30dp"
+      android:paddingLeft="30dp"
+      android:paddingRight="30dp"
+      android:textColor="@color/appViolet"
+      android:text="Playing now..."
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+    <TextView
+      android:textColor="@color/black"
+      android:paddingTop="10dp"
+      android:paddingLeft="30dp"
+      android:paddingRight="30dp"
+      android:id="@+id/active_channel"
+      android:text="Channel 1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+    <TextView
+      android:textColor="@color/appViolet"
+      android:paddingTop="10dp"
+      android:paddingLeft="30dp"
+      android:paddingRight="30dp"
+      android:text="Contact AGBA"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
 
+    <TextView
+      android:id="@+id/contact_details"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingLeft="30dp"
+      android:paddingTop="10dp"
+      android:paddingRight="30dp"
+      android:text="0243 98 33 64 / 0575 98 33 64"
+      android:textColor="@color/black" />
+  </LinearLayout>
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

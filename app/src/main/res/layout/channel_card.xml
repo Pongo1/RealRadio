@@ -19,8 +19,8 @@
       android:id="@+id/channel_play_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:width="110dp"
-      android:height="100dp"
+      android:width="80dp"
+      android:height="80dp"
       android:background="@drawable/left_of_channel_card" />
 
     <TextView
@@ -31,7 +31,7 @@
       android:layout_marginLeft="60dp"
       android:layout_toRightOf="@+id/channel_play_button"
       android:text="CHANNEL 1"
-      android:textSize="20sp" />
+      android:textSize="15sp" />
 
   </RelativeLayout>
 </androidx.cardview.widget.CardView>
