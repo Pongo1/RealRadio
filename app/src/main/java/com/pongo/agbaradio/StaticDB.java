@@ -13,7 +13,7 @@ public class StaticDB {
 
     for (int i = 0; i < 3 ; i++) {
       String f = "Channel " + (i +1);
-      String[] d = {f, f+"-http://www.music.helsinki.fi/tmt/opetus/uusmedia/esim/a2002011001-e02.wav"} ;
+      String[] d = {f,"http://www.music.helsinki.fi/tmt/opetus/uusmedia/esim/a2002011001-e02.wav"} ;
       DB.add(d);
     }
 
