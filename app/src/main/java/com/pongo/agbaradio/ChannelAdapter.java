@@ -29,7 +29,7 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder
   Context context;
   TextView activeChannelItem, streamStatusItem;
   Button currentlyPlayingButton = null; //the previously selected item
-  int clickRate  =0;
+  String btnState = "Stopped";
 
 
   public ChannelAdapter(Context context, ArrayList<String[]> channels, TextView activeChannelItem, TextView streamStatusItem) {
@@ -80,15 +80,23 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder
       //if its the same button, leave the play icon there as it is,
       //if it is not the same, put the pause icon ( NB: pause icon indicates that the currently selected is playing
       if(currentlyPlayingButton == holder.playButton){
+        if(btnState == "Playing"){
+          btnState = "Stopped";
+          holder.playButton.setBackgroundResource(R.drawable.left_of_channel_card);
+        }else{
+          btnState = "Playing";
+          holder.playButton.setBackgroundResource(R.drawable.pause_channel_card);
+        }
 
 
-        Toast.makeText(context, "Its the same button", Toast.LENGTH_SHORT).show();
       }else{
+        btnState = "Playing";
         holder.playButton.setBackgroundResource(R.drawable.pause_channel_card);
       }
 
     }else{
       //means its the first time just put the pause icon
+      btnState = "Playing";
       holder.playButton.setBackgroundResource(R.drawable.pause_channel_card);
     }
 
