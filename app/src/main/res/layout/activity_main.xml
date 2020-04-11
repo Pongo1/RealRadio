@@ -51,7 +51,7 @@
       android:paddingLeft="30dp"
       android:paddingRight="30dp"
       android:textColor="@color/appViolet"
-      android:text="Playing now..."
+      android:text="Ready when you are"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
     <TextView
@@ -60,7 +60,7 @@
       android:paddingLeft="30dp"
       android:paddingRight="30dp"
       android:id="@+id/active_channel"
-      android:text="Channel 1"
+      android:text="Not Channel Yet"
       android:layout_width="match_parent"
       android:layout_height="wrap_content" />
     <TextView

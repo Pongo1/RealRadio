@@ -15,7 +15,7 @@ public class MessageStreamer {
   public String URL, channelName;
   String streamStatus =null;
   TextView streamStatusItem;
-  MediaPlayer mediaPlayer;
+  MediaPlayer mediaPlayer = new MediaPlayer();
   MessageStreamer(String URL, String channelName, TextView streamStatusItem){
     this.URL = URL;
     this.channelName = channelName;
@@ -23,12 +23,9 @@ public class MessageStreamer {
   }
 
   public void prepareAndStart(){
-    //Set media player to prepare ASYNC and update the stream status to be displayed to the user
-
-//    if(streamStatusItem != null){
-//      stopStream();
-//    } FIND A WAY TO STOP THE CURRENT BEFORE THE NEXT ONE STARTS
-    mediaPlayer = new MediaPlayer();
+    if(streamStatusItem != null){
+      mediaPlayer.stop();
+    }
     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
     try {
       mediaPlayer.setDataSource(URL);
