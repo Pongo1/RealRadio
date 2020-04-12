@@ -24,7 +24,7 @@ public class MessageStreamer {
 
   public void prepareAndStart(){
     if(streamStatusItem != null){
-      mediaPlayer.stop();
+      stopStream();
     }
     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
     try {
@@ -46,13 +46,13 @@ public class MessageStreamer {
 
   }
 
-  public void startStream(){
-    //start playing media as soon ans stream is prepared and first media dispatched by "website " is received
-  }
-
   public void stopStream(){
+    if(mediaPlayer.isPlaying()){
+      mediaPlayer.stop();
+      mediaPlayer.release();
+      //mediaPlayer = null;
+    }
     streamStatus = "Stopped, not playing";
-    mediaPlayer.stop();
   }
 
   public String currentChannelName(){

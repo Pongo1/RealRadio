@@ -9,4 +9,7 @@
   <color name="textViolet">#BF6DE3</color>
   <color name="lightGray">#D9D9D9</color>
   <color name="black">#000</color>
+  <color name="lightGreen">#CEFFD9</color>
+  <color name="appGreen">#22AA40</color>
+  <color name="appWhite">#fff</color>
 </resources>

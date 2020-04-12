@@ -30,6 +30,7 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder
   TextView activeChannelItem, streamStatusItem;
   Button currentlyPlayingButton = null; //the previously selected item
   String btnState = "Stopped";
+  MessageStreamer AGBAStreamer;
 
 
   public ChannelAdapter(Context context, ArrayList<String[]> channels, TextView activeChannelItem, TextView streamStatusItem) {
@@ -74,37 +75,45 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder
     });
   }
 
+  public void paintCard(String how,ChannelAdapter.myHolder holder){
+
+  }
+
   public void streamContent(int pos, ChannelAdapter.myHolder holder) {
+    String[] item = channels.get(pos);
     if(currentlyPlayingButton!=null) {
-      //its not the first time, something has already been clicked
-      //if its the same button, leave the play icon there as it is,
-      //if it is not the same, put the pause icon ( NB: pause icon indicates that the currently selected is playing
+      //its not the first time,  btn has already been clicked
+      //if its the same button, check it's state whether playing or not,
+      //if it is not the same, put the pause icon on the current btn and play btn on the prev button ( NB: pause icon indicates that the currently selected is playing
       if(currentlyPlayingButton == holder.playButton){
         if(btnState == "Playing"){
+          AGBAStreamer.stopStream();
+          streamStatusItem.setText("Ready when you are");
           btnState = "Stopped";
           holder.playButton.setBackgroundResource(R.drawable.left_of_channel_card);
         }else{
+          AGBAStreamer = new MessageStreamer(item[1], item[0], streamStatusItem);
+          AGBAStreamer.prepareAndStart();
           btnState = "Playing";
           holder.playButton.setBackgroundResource(R.drawable.pause_channel_card);
         }
-
-
       }else{
+        AGBAStreamer.stopStream();
+        AGBAStreamer = new MessageStreamer(item[1], item[0], streamStatusItem);
+        AGBAStreamer.prepareAndStart();
         btnState = "Playing";
         holder.playButton.setBackgroundResource(R.drawable.pause_channel_card);
       }
 
     }else{
-      //means its the first time just put the pause icon
+      //means its the first time a channel has been clicked just put the pause icon
+      AGBAStreamer = new MessageStreamer(item[1], item[0], streamStatusItem);
+      AGBAStreamer.prepareAndStart();
       btnState = "Playing";
       holder.playButton.setBackgroundResource(R.drawable.pause_channel_card);
     }
-
-    currentlyPlayingButton = holder.playButton;
-    String[] item = channels.get(pos);
-    MessageStreamer AGBAStreamer = new MessageStreamer(item[1], item[0], streamStatusItem);
-    AGBAStreamer.prepareAndStart();
     activeChannelItem.setText(AGBAStreamer.channelName);
+    currentlyPlayingButton = holder.playButton;
   }
 
   @Override
