@@ -47,10 +47,14 @@ public class MessageStreamer {
   }
 
   public void stopStream(){
-    if(mediaPlayer.isPlaying()){
-      mediaPlayer.stop();
-      mediaPlayer.release();
-      //mediaPlayer = null;
+    try {
+      if (mediaPlayer.isPlaying()) {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        //mediaPlayer = null;
+      }
+    }catch(Exception e){
+
     }
     streamStatus = "Stopped, not playing";
   }

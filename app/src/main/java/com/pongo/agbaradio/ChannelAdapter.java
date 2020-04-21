@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import java.util.HashMap;
  * the TextViews are updated per the state of the media player that the "MessageStreamer" class uses
  * */
 public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder> {
-  ArrayList<String[]> channels;
+  JSONArray channels;
   Context context;
   TextView activeChannelItem, streamStatusItem;
   Button currentlyPlayingButton = null; //the previously selected item
@@ -33,11 +34,16 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder
   MessageStreamer AGBAStreamer;
 
 
-  public ChannelAdapter(Context context, ArrayList<String[]> channels, TextView activeChannelItem, TextView streamStatusItem) {
+  public ChannelAdapter(Context context, JSONArray channels, TextView activeChannelItem, TextView streamStatusItem) {
     this.channels = channels;
     this.context = context;
     this.activeChannelItem = activeChannelItem;
     this.streamStatusItem = streamStatusItem;
+  }
+
+
+  public void setChannels(JSONArray channels) {
+    this.channels = channels;
   }
 
   @NonNull
@@ -46,6 +52,46 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder
     View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.channel_card, parent, false);
     myHolder holder = new myHolder(v);
     return holder;
+  }
+
+
+  public String getAChannelName(int position) {
+    JSONObject item = new JSONObject();
+    String name = "";
+    try {
+      item = channels.getJSONObject(position);
+      name = (String) item.get("name");
+    } catch (Exception e) {
+      Log.d("Error:name --<", e.getMessage());
+    }
+
+    return name;
+  }
+
+  public String getAChannelURL(int position) {
+    JSONObject item = new JSONObject();
+    String URL = "";
+    try {
+      item = channels.getJSONObject(position);
+      URL = (String) item.get("streamingLink");
+    } catch (Exception e) {
+      Log.d("Error:streaminglink --<", e.getMessage());
+    }
+
+    return URL;
+  }
+
+  public JSONObject getChannelOtherInfo(int position) {
+    JSONObject item = new JSONObject();
+    JSONObject obj = new JSONObject();
+    try {
+      item = channels.getJSONObject(position);
+      obj = item.getJSONObject("other");
+    } catch (Exception e) {
+      Log.d("Error:otherInfo --<", e.getMessage());
+    }
+
+    return obj;
   }
 
 
@@ -58,7 +104,7 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder
 
   @Override
   public void onBindViewHolder(@NonNull final ChannelAdapter.myHolder holder, final int position) {
-    holder.channelName.setText(channels.get(position)[0]);
+    holder.channelName.setText(getAChannelName(position));
     holder.playButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -75,39 +121,35 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder
     });
   }
 
-  public void paintCard(String how,ChannelAdapter.myHolder holder){
-
-  }
 
   public void streamContent(int pos, ChannelAdapter.myHolder holder) {
-    String[] item = channels.get(pos);
-    if(currentlyPlayingButton!=null) {
+    if (currentlyPlayingButton != null) {
       //its not the first time,  btn has already been clicked
       //if its the same button, check it's state whether playing or not,
       //if it is not the same, put the pause icon on the current btn and play btn on the prev button ( NB: pause icon indicates that the currently selected is playing
-      if(currentlyPlayingButton == holder.playButton){
-        if(btnState == "Playing"){
+      if (currentlyPlayingButton == holder.playButton) {
+        if (btnState == "Playing") {
           AGBAStreamer.stopStream();
           streamStatusItem.setText("Ready when you are");
           btnState = "Stopped";
           holder.playButton.setBackgroundResource(R.drawable.left_of_channel_card);
-        }else{
-          AGBAStreamer = new MessageStreamer(item[1], item[0], streamStatusItem);
+        } else {
+          AGBAStreamer = new MessageStreamer(getAChannelURL(pos), getAChannelName(pos), streamStatusItem);
           AGBAStreamer.prepareAndStart();
           btnState = "Playing";
           holder.playButton.setBackgroundResource(R.drawable.pause_channel_card);
         }
-      }else{
+      } else {
         AGBAStreamer.stopStream();
-        AGBAStreamer = new MessageStreamer(item[1], item[0], streamStatusItem);
+        AGBAStreamer = new MessageStreamer(getAChannelURL(pos), getAChannelName(pos), streamStatusItem);
         AGBAStreamer.prepareAndStart();
         btnState = "Playing";
         holder.playButton.setBackgroundResource(R.drawable.pause_channel_card);
       }
 
-    }else{
+    } else {
       //means its the first time a channel has been clicked just put the pause icon
-      AGBAStreamer = new MessageStreamer(item[1], item[0], streamStatusItem);
+      AGBAStreamer = new MessageStreamer(getAChannelURL(pos), getAChannelName(pos), streamStatusItem);
       AGBAStreamer.prepareAndStart();
       btnState = "Playing";
       holder.playButton.setBackgroundResource(R.drawable.pause_channel_card);
@@ -118,7 +160,7 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.myHolder
 
   @Override
   public int getItemCount() {
-    return channels.size();
+    return channels.length();
   }
 
   class myHolder extends RecyclerView.ViewHolder {
