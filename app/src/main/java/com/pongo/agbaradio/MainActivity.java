@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onResponse(JSONArray response) {
         ChannelAdapter channelAdapter = new ChannelAdapter(MainActivity.this,response,activeChannel,streamStatus);
-        Toast.makeText(MainActivity.this, "Data found!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Good to go!", Toast.LENGTH_SHORT).show();
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(channelAdapter);
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onErrorResponse(VolleyError error) {
         Log.d("Error:fetchingReq ----<",error.getMessage());
+        Toast.makeText(MainActivity.this, "Are you sure you are connected to the internet?", Toast.LENGTH_SHORT).show();
       }
     });
 

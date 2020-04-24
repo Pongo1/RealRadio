@@ -12,4 +12,7 @@
   <color name="lightGreen">#CEFFD9</color>
   <color name="appGreen">#22AA40</color>
   <color name="appWhite">#fff</color>
+  <color name="splashColor">#331864</color>
+  <color name="lightPurple">#C58BFF</color>
+  <color name="orange">#FCAE00</color>
 </resources>
