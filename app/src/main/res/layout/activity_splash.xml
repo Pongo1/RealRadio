@@ -4,11 +4,24 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-android:background="@color/lightViolet"
+android:background="@drawable/gradient"
   tools:context=".Splash">
 
 
   <TextView
+
+    android:layout_margin="20dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/music_logo"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentBottom="true"
+
+    android:fontFamily="@font/nothing_you_could_do"
+
+    android:text="Powered by Biibisoft"
+    android:textColor="@color/appWhite"
+    android:textSize="14sp" /><TextView
     android:id="@+id/theme"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -18,14 +31,17 @@ android:background="@color/lightViolet"
     android:fontFamily="@font/nothing_you_could_do"
 
     android:text="'Otumi Ade Nyinaa ye'"
-    android:textColor="@color/appViolet"
+    android:textColor="@color/appWhite"
     android:textSize="22sp" />
+
   <ImageView
+    android:layout_marginTop="20dp"
     android:id="@+id/music_logo"
+    android:layout_width="171dp"
+    android:layout_height="177dp"
     android:layout_centerInParent="true"
-    android:layout_width="wrap_content"
-    android:background="@drawable/agba_music_logo"
-    android:layout_height="wrap_content" />
+    android:layout_centerVertical="true"
+    android:background="@drawable/mavis_draw" />
 
 
   <TextView
@@ -36,9 +52,9 @@ android:background="@color/lightViolet"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="15dp"
     android:fontFamily="@font/creepster"
-    android:onClick="next"
+
     android:text="AGBA RADIO"
-    android:textColor="@color/appViolet"
+    android:textColor="@color/appWhite"
     android:textSize="34sp" />
 
 
